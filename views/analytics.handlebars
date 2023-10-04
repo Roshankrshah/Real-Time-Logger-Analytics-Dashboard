@@ -28,13 +28,12 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Busiest days of the week</h5>
-                    <div class="card-text" style="width: 18rem;" v-for="day in requestsPerDay">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
+                    <div class="card-text" >
+                        <h3>
                                 {{toJson analytics.requestPerDay.[0]._id}} ({{toJson
                                 analytics.requestPerDay.[0].numberOfRequests }} requests)
-                            </li>
-                        </ul>
+                            
+                        </h3>
                     </div>
                 </div>
             </div>
@@ -43,13 +42,12 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Busiest hours of day</h5>
-                    <div class="card-text" style="width: 18rem;" v-for="hour in requestsPerHour">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
+                    <div class="card-text">
+                        <h3>
                                 {{ toJson analytics.requestPerHour.[0]._id }} ({{ toJson
                                 analytics.requestPerHour.[0].numberOfRequests }} requests)
-                            </li>
-                        </ul>
+                            
+                        </h3>
                     </div>
                 </div>
             </div>
@@ -60,12 +58,11 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Most visited routes</h5>
-                    <div class="card-text" style="width: 18rem;" v-for="route in statsPerRoute">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
+                    <div class="card-text">
+                        <h3>
                                 {{toJson analytics.statsPerRoute.[0]._id.method }} {{toJson analytics.statsPerRoute.[0]._id.url }} ({{toJson analytics.statsPerRoute.[0].numberOfRequests }} requests)
-                            </li>
-                        </ul>
+                        
+                        </h3>
                     </div>
                 </div>
             </div>

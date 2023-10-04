@@ -1,8 +1,31 @@
 body {
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    color: white;
+    background-color: rgb(33, 33, 33);
 }
 
-a {
-    color: #00B7FF;
+.row {
+    margin-bottom: 50px;
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.container{
+    padding: 0px auto auto 100px ;
+}
+
+.card{
+    background-color: gray;
+}
+
+.card-title{
+    color: red;
+}
+
+.card-text{
+    color: greenyellow;
 }

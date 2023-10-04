@@ -2,7 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const connectDB = require('./config/db');
+const moment = require('moment');
 const Pusher = require('pusher');
+const RequestLog = require('./models/request_log');
 
 const app = express();
 
@@ -12,6 +14,24 @@ const pusher = new Pusher({
     secret: process.env.SECRET,
     cluster: "ap2",
 });
+
+app.use((req,res,next)=>{
+    let requestTime = Date.now();
+    res.on('finish',()=>{
+        if(req.path ==='/analytics'){
+            return;
+        }
+
+        RequestLog.create({
+            url: req.path,
+            method: req.method,
+            responseTime: (Date.now() - requestTime) / 1000,
+            day: moment(requestTime).format('dddd'),
+            hour: moment(requestTime).hour(),
+        });
+    });
+    next();
+})
 
 app.set('views', path.join(__dirname, 'views'));
 require('hbs').registerHelper('toJson', data => JSON.stringify(data));

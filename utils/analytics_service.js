@@ -31,7 +31,7 @@ module.exports = {
                     numberOfRequests: {$sum: 1}
                 }
             },
-            {$sort: {numberOfRequests: 1}}
+            {$sort: {numberOfRequests: -1}}
         ]);
 
         let getAverageResponseTime = RequestLog.aggregate([

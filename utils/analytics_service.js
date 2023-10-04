@@ -11,7 +11,8 @@ module.exports = {
                     responseTime: {$avg: '$responseTime'},
                     numberOfRequests: {$sum: 1},
                 }
-            }
+            },
+            {$sort: {numberOfRequests: -1}}
         ]);
 
         let getRequestPerDay = RequestLog.aggregate([

@@ -19,7 +19,7 @@ const pusher = new Pusher({
 app.use((req, res, next) => {
     let requestTime = Date.now();
     res.on('finish', () => {
-        if (req.path === '/analytics') {
+        if (req.path === '/analytics' ||req.path === "/style.css" || req.path === "/favicon.ico") {
             return;
         }
 

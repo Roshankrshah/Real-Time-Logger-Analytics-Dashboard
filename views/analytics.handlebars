@@ -31,10 +31,8 @@
                     <div class="card-text" style="width: 18rem;" v-for="day in requestsPerDay">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                {{#each analytics.requestPerDay}}
-                                    {{toJson this._id}} ({{toJson this.numberOfRequests }} requests)
-                                {{/each}}
-                                 
+                                {{toJson analytics.requestPerDay.[0]._id}} ({{toJson
+                                analytics.requestPerDay.[0].numberOfRequests }} requests)
                             </li>
                         </ul>
                     </div>
@@ -48,9 +46,8 @@
                     <div class="card-text" style="width: 18rem;" v-for="hour in requestsPerHour">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                {{#each analytics.requestPerHour}}
-                                    {{toJson this._id}} ({{toJson this.numberOfRequests }} requests)
-                                {{/each}}
+                                {{ toJson analytics.requestPerHour.[0]._id }} ({{ toJson
+                                analytics.requestPerHour.[0].numberOfRequests }} requests)
                             </li>
                         </ul>
                     </div>
@@ -58,7 +55,6 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-5">
             <div class="card">
@@ -67,22 +63,8 @@
                     <div class="card-text" style="width: 18rem;" v-for="route in statsPerRoute">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                {{#each analytics.statsPerRoute}}
-                                    {{toJson this._id.method}} {{ toJson this._id.url }} ({{toJson this.numberOfRequests }} requests)
-                                {{/each}}
+                                {{toJson analytics.statsPerRoute.[0]._id.method }} {{toJson analytics.statsPerRoute.[0]._id.url }} ({{toJson analytics.statsPerRoute.[0].numberOfRequests }} requests)
                             </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-5">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Slowest routes</h5>
-                    <div class="card-text" style="width: 18rem;" v-for="route in statsPerRoute">
-                        <ul class="list-group list-group-flush">
-                            {{ analytics.statsPerRoute._id.method }} {{ analytics.statsPerRoute._id.url }} ({{ analytics.statsPerRoute.responseTime }} s)
                         </ul>
                     </div>
                 </div>
@@ -91,14 +73,13 @@
     </div>
 </div>
 
-<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-<script>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script>
 
-    const pusher = new Pusher('4e5c9b8f211ca6c1af8d', {cluster: 'ap2'});
-    
-    pusher.subscribe('analytics')
-        .bind('updated', (data) => {
-            console.log(data.analytics);
-            console.log(data.analytics.requestPerDay[0]._id);
-        })
-</script>
+        const pusher = new Pusher('4e5c9b8f211ca6c1af8d', { cluster: 'ap2' });
+
+        pusher.subscribe('analytics')
+            .bind('updated', (data) => {
+                console.log(data.analytics);
+            })
+    </script>

@@ -44,7 +44,20 @@ app.set('view engine', 'hbs');
 
 app.get('/',(req,res)=>{
     res.send('starting logger dashboard');
-})
+});
+
+app.get('/wait/:seconds' ,async (req,res)=>{
+    await ((seconds)=>{
+        return new Promise(resolve=>{
+            setTimeout(
+                () =>resolve(res.send(`Waited for ${seconds} seconds`)),
+                seconds * 1000
+            )
+        });
+    })(req.params.seconds)
+});
+
+
 const PORT = process.env.PORT || 2323;
 
 const start = async()=>{

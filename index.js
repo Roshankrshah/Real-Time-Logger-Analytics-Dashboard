@@ -5,6 +5,7 @@ const connectDB = require('./config/db');
 const moment = require('moment');
 const Pusher = require('pusher');
 const RequestLog = require('./models/request_log');
+const analytics_service = require('./utils/analytics_service');
 
 const app = express();
 
@@ -29,6 +30,9 @@ app.use((req,res,next)=>{
             day: moment(requestTime).format('dddd'),
             hour: moment(requestTime).hour(),
         });
+
+        require('./utils/analytics_service').getAnalytics()
+            .then(analytics => console.log(analytics));
     });
     next();
 })
